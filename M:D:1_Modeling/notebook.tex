@@ -1,0 +1,549 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{MD1\_Simulation}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+As shown in the above dataframe:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  when lambda keeps the same, the variance of L increase as n increases.
+\item
+  when n keeps the same, the variance of L increase as lambda increases.
+\end{enumerate}
+
+when other factors remains the same, the the stability of the system
+decreases as n or lambda increase. When the arrival interval is less
+than the service time, the system is much more unstable than the case
+that arrival interval is longer than the service time. The customers
+accumulated much faster in the queue for system where the arrival
+interval is shorter than the service time.
+
+ 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{k+kn}{from} \PY{n+nn}{mytypes} \PY{k}{import} \PY{n}{Queue}
+         \PY{k+kn}{import} \PY{n+nn}{random}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib} \PY{k}{as} \PY{n+nn}{mp}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} A class to represent a single customer in an M/D/1 queue simulation.}
+        \PY{c+c1}{\PYZsh{} Each customer has three attributes:}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}  \PYZhy{} cid: A customer identifier (can be anything, but we will use consecutive integers)}
+        \PY{c+c1}{\PYZsh{}  \PYZhy{} arrival\PYZus{}time: The time at which the customer arrived at the queue}
+        \PY{c+c1}{\PYZsh{}  \PYZhy{} departure\PYZus{}time: The time at which the customer departed the queue}
+        \PY{k}{class} \PY{n+nc}{Customer}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{n}{CUSTOMER\PYZus{}ID} \PY{o}{=} \PY{l+m+mi}{0}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{arrival\PYZus{}time}\PY{p}{)}\PY{p}{:}
+                \PY{n}{Customer}\PY{o}{.}\PY{n}{CUSTOMER\PYZus{}ID} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cid} \PY{o}{=} \PY{n}{Customer}\PY{o}{.}\PY{n}{CUSTOMER\PYZus{}ID}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{arrival\PYZus{}time} \PY{o}{=} \PY{n}{arrival\PYZus{}time}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{departure\PYZus{}time} \PY{o}{=} \PY{k+kc}{None}
+                
+            \PY{n+nd}{@property}
+            \PY{k}{def} \PY{n+nf}{wait}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{departure\PYZus{}time} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{k}{return} \PY{k+kc}{None}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{departure\PYZus{}time} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{arrival\PYZus{}time}
+                
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Customer(}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{, }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cid}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{arrival\PYZus{}time}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}repr\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{} simulate\PYZus{}md1: Simulates an M/D/1 queue.}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} In an M/D/1 queue que have:}
+         \PY{c+c1}{\PYZsh{}   }
+         \PY{c+c1}{\PYZsh{} \PYZhy{} Arrivals follow a Markov process (M)}
+         \PY{c+c1}{\PYZsh{} \PYZhy{} The time to service each customer is deterministic (D)}
+         \PY{c+c1}{\PYZsh{} \PYZhy{} There is only one server (1)}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} The function takes three parameters (plus one optional parameter)}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} \PYZhy{} lambd: The simulation uses an exponential distribution to determine}
+         \PY{c+c1}{\PYZsh{}          the arrival time of the next customer. This parameters is the}
+         \PY{c+c1}{\PYZsh{}          lambda parameter to an exponential distribution (specifically,}
+         \PY{c+c1}{\PYZsh{}          Python\PYZsq{}s random.expovariate)}
+         \PY{c+c1}{\PYZsh{} \PYZhy{} mu: The rate at which customers are serviced. The larger this value is,}
+         \PY{c+c1}{\PYZsh{}       the more customers will be serviced per unit of time}
+         \PY{c+c1}{\PYZsh{} \PYZhy{} max\PYZus{}time: The maximum time of the simulation}
+         \PY{c+c1}{\PYZsh{} \PYZhy{} verbosity (optional): Can be 0 (no output), 1 (print state of the queue}
+         \PY{c+c1}{\PYZsh{}                         at each time), or 2 (same as 1, but also print when}
+         \PY{c+c1}{\PYZsh{}                         each customer arrives and departs)}
+         \PY{c+c1}{\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} The function returns two lists: one with all the customers that were served}
+         \PY{c+c1}{\PYZsh{} during the simulation, and one with all the customers that were yet to be}
+         \PY{c+c1}{\PYZsh{} served when the simulation ended.}
+         \PY{c+c1}{\PYZsh{}}
+         
+         \PY{k}{def} \PY{n+nf}{simulate\PYZus{}md1}\PY{p}{(}\PY{n}{lambd}\PY{p}{,} \PY{n}{mu}\PY{p}{,} \PY{n}{max\PYZus{}time}\PY{p}{,} \PY{n}{verbosity} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+             \PY{n}{md1} \PY{o}{=} \PY{n}{Queue}\PY{p}{(}\PY{p}{)}
+             \PY{n}{L\PYZus{}array} \PY{o}{=}\PY{p}{[}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} Our return values: the list of customers that have been}
+             \PY{c+c1}{\PYZsh{} served, and the list of customers that haven\PYZsq{}t been served}
+             \PY{n}{served\PYZus{}customers} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{unserved\PYZus{}customers} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} The type of simulation we have implemented in this function}
+             \PY{c+c1}{\PYZsh{} is known as a \PYZdq{}discrete event simulation\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} (https://en.wikipedia.org/wiki/Discrete\PYZus{}event\PYZus{}simulation), where}
+             \PY{c+c1}{\PYZsh{} we simulate a discrete sequence of events: customer arrivals}
+             \PY{c+c1}{\PYZsh{} and customer departures. So, we only need to keep track of when }
+             \PY{c+c1}{\PYZsh{} the next arrival and the next departure will take place (because }
+             \PY{c+c1}{\PYZsh{} nothing interesting happens between those two types of events). }
+             \PY{c+c1}{\PYZsh{} Then, in each step of the simulation, we simply advance the }
+             \PY{c+c1}{\PYZsh{} simulation clock to earliest next event. Note that, because}
+             \PY{c+c1}{\PYZsh{} we have a single server, this can be easily done with just}
+             \PY{c+c1}{\PYZsh{} two variables.}
+         
+             \PY{n}{next\PYZus{}arrival} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{expovariate}\PY{p}{(}\PY{n}{lambd}\PY{p}{)}
+             \PY{n}{next\PYZus{}service} \PY{o}{=} \PY{n}{next\PYZus{}arrival} \PY{o}{+} \PY{l+m+mi}{1}\PY{o}{/}\PY{n}{mu}
+                 
+             \PY{c+c1}{\PYZsh{} We initialize the simulation\PYZsq{}s time to the earliest event:}
+             \PY{c+c1}{\PYZsh{} the next arrival time}
+             \PY{n}{t} \PY{o}{=} \PY{n}{next\PYZus{}arrival}
+             
+             \PY{k}{while} \PY{n}{t} \PY{o}{\PYZlt{}} \PY{n}{max\PYZus{}time}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} Process a new arrival}
+                 \PY{k}{if} \PY{n}{t} \PY{o}{==} \PY{n}{next\PYZus{}arrival}\PY{p}{:}
+                     \PY{n}{customer} \PY{o}{=} \PY{n}{Customer}\PY{p}{(}\PY{n}{arrival\PYZus{}time} \PY{o}{=} \PY{n}{t}\PY{p}{)}
+                     \PY{n}{md1}\PY{o}{.}\PY{n}{enqueue}\PY{p}{(}\PY{n}{customer}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{}if verbosity \PYZgt{}= 2:}
+                         \PY{c+c1}{\PYZsh{}print(\PYZdq{}\PYZob{}:10.2f\PYZcb{}: Customer \PYZob{}\PYZcb{} arrives\PYZdq{}.format(t, customer.cid))}
+         
+                     \PY{n}{next\PYZus{}arrival} \PY{o}{=} \PY{n}{t} \PY{o}{+} \PY{n}{random}\PY{o}{.}\PY{n}{expovariate}\PY{p}{(}\PY{n}{lambd}\PY{p}{)}
+                     
+                 \PY{c+c1}{\PYZsh{} The customer at the head of the queue has been served}
+                 \PY{k}{if} \PY{n}{t} \PY{o}{==} \PY{n}{next\PYZus{}service}\PY{p}{:}
+                     \PY{n}{done\PYZus{}customer} \PY{o}{=} \PY{n}{md1}\PY{o}{.}\PY{n}{dequeue}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{done\PYZus{}customer}\PY{o}{.}\PY{n}{departure\PYZus{}time} \PY{o}{=} \PY{n}{t}
+                     
+                     \PY{n}{served\PYZus{}customers}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{done\PYZus{}customer}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{}if verbosity \PYZgt{}= 2:}
+                         \PY{c+c1}{\PYZsh{}print(\PYZdq{}\PYZob{}:10.2f\PYZcb{}: Customer \PYZob{}\PYZcb{} departs\PYZdq{}.format(t, done\PYZus{}customer.cid))            }
+                     
+                     \PY{k}{if} \PY{n}{md1}\PY{o}{.}\PY{n}{is\PYZus{}empty}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                         \PY{c+c1}{\PYZsh{} The next service time will be 1/mu after the next arrival}
+                         \PY{n}{next\PYZus{}service} \PY{o}{=} \PY{n}{next\PYZus{}arrival} \PY{o}{+} \PY{l+m+mi}{1}\PY{o}{/}\PY{n}{mu}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{c+c1}{\PYZsh{} We start serving the next customer, so the next service time}
+                         \PY{c+c1}{\PYZsh{} will be 1/mu after the current time.}
+                         \PY{n}{next\PYZus{}service} \PY{o}{=} \PY{n}{t} \PY{o}{+} \PY{l+m+mi}{1}\PY{o}{/}\PY{n}{mu}
+                     
+                 \PY{c+c1}{\PYZsh{}if verbosity \PYZgt{}= 1:}
+                     \PY{c+c1}{\PYZsh{}print(\PYZdq{}\PYZob{}:10.2f\PYZcb{}: \PYZob{}\PYZcb{}\PYZdq{}.format(t, \PYZdq{}\PYZsh{}\PYZdq{}*md1.length))}
+                     \PY{c+c1}{\PYZsh{}store the L in L\PYZus{}array }
+                 \PY{n}{L\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{md1}\PY{o}{.}\PY{n}{length}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Advance the simulation clock to the next event}
+                 \PY{n}{t} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{next\PYZus{}arrival}\PY{p}{,} \PY{n}{next\PYZus{}service}\PY{p}{)}
+                 
+             \PY{c+c1}{\PYZsh{} Any remaining customers in the queue haven\PYZsq{}t been served}
+             \PY{k}{while} \PY{o+ow}{not} \PY{n}{md1}\PY{o}{.}\PY{n}{is\PYZus{}empty}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{unserved\PYZus{}customers}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{md1}\PY{o}{.}\PY{n}{dequeue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 
+             \PY{k}{return} \PY{n}{L\PYZus{}array}
+\end{Verbatim}
+
+
+    mu is service rate instead of service, divide 1 hour per customer by 1
+customer per hour --\textgreater{} mu =1
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{c+c1}{\PYZsh{}loop through 9 different cases and record the results}
+         \PY{n}{result\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lambda}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{variance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{j} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{L\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{full\PYZus{}L\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         
+         \PY{k}{for} \PY{n}{lambd} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{1.1}\PY{p}{]}\PY{p}{:}
+             \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{]}\PY{p}{:}
+                 \PY{n}{L\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{full\PYZus{}L\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{L\PYZus{}array} \PY{o}{=} \PY{n}{simulate\PYZus{}md1}\PY{p}{(}\PY{n}{lambd}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{verbosity}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+                     \PY{n}{full\PYZus{}L\PYZus{}array}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{n}{L\PYZus{}array}\PY{p}{)}
+                 \PY{n}{mean\PYZus{}L} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{full\PYZus{}L\PYZus{}array}\PY{p}{)}
+                 \PY{n}{var\PYZus{}L} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{full\PYZus{}L\PYZus{}array}\PY{p}{)}
+                 \PY{n}{rows} \PY{o}{=} \PY{p}{[}\PY{n}{n}\PY{p}{,} \PY{n}{lambd}\PY{p}{,} \PY{n}{mean\PYZus{}L}\PY{p}{,} \PY{n}{var\PYZus{}L}\PY{p}{]}
+                 \PY{n}{result\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{rows}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{lambd}\PY{p}{)}\PY{p}{,} \PY{n}{mean\PYZus{}L}\PY{p}{,} \PY{n}{var\PYZus{}L}\PY{p}{)}
+                 \PY{n}{j}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100 0.9 3.27745995423 5.61924023009
+1000 0.9 5.8154414196 24.0671725622
+10000 0.9 5.25399388501 20.1635561136
+100 1 6.28780743066 18.3556807499
+1000 1 11.3988602526 63.2809454101
+10000 1 49.3329969525 1358.5442825
+100 1.1 10.7873345936 42.8942819315
+1000 1.1 55.1967848428 1266.39747495
+10000 1.1 493.967715469 82924.903268
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{full\PYZus{}L\PYZus{}array}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{result\PYZus{}df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}94}]:}          n  lambda        mean      variance
+         0    100.0     0.9    3.277460      5.619240
+         1   1000.0     0.9    5.815441     24.067173
+         2  10000.0     0.9    5.253994     20.163556
+         3    100.0     1.0    6.287807     18.355681
+         4   1000.0     1.0   11.398860     63.280945
+         5  10000.0     1.0   49.332997   1358.544283
+         6    100.0     1.1   10.787335     42.894282
+         7   1000.0     1.1   55.196785   1266.397475
+         8  10000.0     1.1  493.967715  82924.903268
+\end{Verbatim}
+            
+    \hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+As shown in the above dataframe:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  when lambda keeps the same, the variance of L increase as n increases.
+\item
+  when n keeps the same, the variance of L increase as lambda increases.
+\end{enumerate}
+
+when other factors remains the same, the the stability of the system
+decreases as n or lambda increase. When the arrival interval is less
+than the service time, the system is much more unstable than the case
+that arrival interval is longer than the service time. The customers
+accumulated much faster in the queue for system where the arrival
+interval is shorter than the service time.
+
+ 
+
+    \hypertarget{reference}{%
+\paragraph{Reference}\label{reference}}
+
+The code above is adapted from a lectrure example for CMSC 12100/CAPP
+30121 at University of Chicago. The course was instructed by multiple
+instructors and teaching assistants.
+
+The code above is modified for the use of calculating average system
+length / average customers in the system (L).
+
+https://classes.cs.uchicago.edu/archive/2017/fall/12100-1/lecture-examples/
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
